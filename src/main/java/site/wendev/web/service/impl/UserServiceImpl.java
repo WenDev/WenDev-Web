@@ -7,7 +7,6 @@ import site.wendev.web.domain.User;
 import site.wendev.web.service.UserService;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service

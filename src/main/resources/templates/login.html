@@ -13,6 +13,7 @@
         <input id="password" name="password" type="password">
         <br>
         <p th:text="${errInfo}"></p>
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
         <input type="submit" value="submit">
     </form>
 </body>

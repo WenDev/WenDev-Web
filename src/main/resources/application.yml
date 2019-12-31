@@ -5,3 +5,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://wendev:wendev@127.0.0.1:27017/wendev
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+    enabled: true
