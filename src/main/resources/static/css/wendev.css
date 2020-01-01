@@ -1,0 +1,64 @@
+/*
+对HUI的一些改进，主要是导航条、输入框等改成了极简主义的风格
+*/
+
+body {
+    font-family: varela round, Arial, sans-serif;
+}
+
+hr {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.group {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.navbar-black {
+    background-color:#fff;
+    border-bottom:#CDCDCD 1px solid;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar-black .logo{
+    color: #000
+}
+.navbar-black .navbar-logo-m {
+    color: #000
+}
+
+.navbar-black .navbar-nav > ul > li,
+.navbar-black .navbar-nav > ul > li > a {
+    color:#000
+}
+
+.navbar-black .navbar-nav > ul > li > a:hover,
+.navbar-black .navbar-nav > ul > li.current > a {
+    color:#000
+}
+
+.navbar-black .navbar-userbar{
+    color: #000
+}
+
+.nav > ul > li > a:hover,.nav > ul > li.current > a {
+    background-color: rgba(0, 0, 0,0.1);
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s ease 0s;
+    -moz-transition: background-color 0.3s ease 0s;
+    -o-transition: background-color 0.3s ease 0s;
+    -ms-transition: background-color 0.3s ease 0s;
+    transition: background-color 0.3s ease 0s
+}
+
+.input-text:hover, .textarea:hover {
+    border: solid 1px #8b0000
+}
+
+.input-text.focus, .textarea.focus{
+    border: solid 1px #8b0000 \9;
+    box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(139, 0, 0, 0.6)
+}

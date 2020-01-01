@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web
                 .ignoring()
-                .mvcMatchers("/css/**", "/js/**")
+                .mvcMatchers("/css/**", "/js/**", "/images/**")
                 .mvcMatchers("/register", "/register?error");
     }
 
