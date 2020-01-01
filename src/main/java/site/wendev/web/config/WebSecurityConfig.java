@@ -2,10 +2,13 @@ package site.wendev.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import site.wendev.web.service.impl.UserDetailServiceImpl;
@@ -14,7 +17,7 @@ import site.wendev.web.service.impl.UserDetailServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
-    UserDetailServiceImpl userDetailServiceImpl() {
+    UserDetailsService userDetailService() {
         return new UserDetailServiceImpl();
     }
 
@@ -24,15 +27,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .mvcMatchers("/css/**", "/js/**")
+                .mvcMatchers("/register", "/register?error");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/auth/login")
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/index", "/", "/register").permitAll()
-                .antMatchers("/css/**", "/js/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/login", "/index", "/", "/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/register").permitAll()
+                .antMatchers("/login?error", "/register?error").permitAll()
                 .antMatchers("/superAdmin/**").hasRole("superAdmin")
                 .anyRequest()
                 .authenticated()
@@ -43,6 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailServiceImpl()).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailService()).passwordEncoder(passwordEncoder());
     }
 }

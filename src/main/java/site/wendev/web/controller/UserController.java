@@ -9,6 +9,7 @@ import site.wendev.web.domain.User;
 import site.wendev.web.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 public class UserController {
@@ -28,7 +29,10 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping(value = "/login")
+    /**
+     * 使用了Spring Security之后，这个自定义的登录逻辑就不需要了
+     * @deprecated
+     */
     public String login(String username, String password, RedirectAttributes attributes) {
         if (username == null || password == null) {
             attributes.addFlashAttribute("errInfo", "用户名或密码不能为空！");
@@ -44,6 +48,18 @@ public class UserController {
         } else {
             attributes.addFlashAttribute("errInfo", "登录失败：用户名或密码错误");
             return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/register")
+    public String register(String username, String password, String email, String nickname) {
+        User regUser = userService.register(new User()
+                .setUsername(username).setPassword(password).setEmail(email)
+                .setNickname(nickname).setRegisterDate(new Date()));
+        if (regUser != null) {
+            return "redirect:/login";
+        } else {
+            return "redirect:/register?error";
         }
     }
 }

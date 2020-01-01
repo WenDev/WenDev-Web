@@ -2,17 +2,20 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>Login</title>
 </head>
 <body>
-    <form method="post" action="/login">
-        <label for="username">用户名</label>
-        <input id="username" name="username" type="text">
+    <h1>WenDev | Login</h1>
+    <form method="post" action="/auth/login">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Username">
         <br>
-        <label for="password">密码</label>
-        <input id="password" name="password" type="password">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Password">
         <br>
-        <p th:text="${errInfo}"></p>
+        <div th:if="${param.error}">
+            <p>Invalid username or password.</p>
+        </div>
         <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
         <input type="submit" value="submit">
     </form>

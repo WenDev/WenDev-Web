@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
 
         // 用户名未被使用，注册成功
         } else {
-            user.setRole("superAdmin");   // 设置用户的权限为user
+            user.setRole("user");   // 设置用户的权限为user
             userDao.insert(user);   // 插入用户记录
             return user;
         }

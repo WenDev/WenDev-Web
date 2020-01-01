@@ -1,19 +1,19 @@
 package site.wendev.web.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import site.wendev.web.dao.UserDao;
 import site.wendev.web.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
@@ -30,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
-        System.out.println(user.getRole());
+//        System.out.println(user.getRole());
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());
 

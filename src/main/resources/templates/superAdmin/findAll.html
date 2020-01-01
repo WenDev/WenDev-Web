@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>查找全部用户</title>
+    <title>All Users</title>
 </head>
 <body>
-    <p>查找全部用户页面</p>
+    <h1>All Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>uid</td>
+                <td>Username</td>
+                <td>Email</td>
+                <td>RegisterTime</td>
+                <td>Role</td>
+                <td>Option</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getRegisterDate()}"></td>
+            <td th:text="${user.getRole()}"></td>
+            <td>
+                <a th:href="@{'/superAdmin/modify/' + ${user.getId()}}">Modify</a>
+                <a th:href="@{'/superAdmin/delete/' + ${user.getId()}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
