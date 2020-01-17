@@ -1,3 +1,5 @@
+**本项目已经废弃（被重构），新项目地址：[https://github.com/WenDev/WenDev-WebSite](https://github.com/WenDev/WenDev-WebSite)，请前往新地址进行查看代码、Star等操作**
+
 # WenDev-Web
 
 使用`Spring Boot`和`MongoDB`构建的个人网站框架。
